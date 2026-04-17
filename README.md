@@ -2,7 +2,7 @@
 
 > Automated health data visualization from Garmin, DEXA scans, blood tests, and cognitive assessments.  
 > Charts auto-regenerate via GitHub Actions on data push.  
-> **[→ Interactive Dashboard (GitHub Pages)](https://ksk5429.github.io/health_tracker/)**
+> **[→ Interactive Dashboard (GitHub Pages)](https://ksk5429.github.io/health_dashboard/)**
 
 ---
 
@@ -33,12 +33,11 @@
 
 ![Activity Overview](dashboard/charts/02_activity_overview.png)
 
-<details>
-<summary>📅 Steps Heatmap (GitHub-style contribution calendar)</summary>
+### 📅 Health Calendar Heatmaps
 
-![Steps Heatmap](dashboard/charts/06_steps_heatmap.png)
+6 metrics as GitHub-style contribution calendars — aligned to visually correlate patterns across days.
 
-</details>
+![Health Heatmaps](dashboard/charts/06_health_heatmaps.png)
 
 ---
 

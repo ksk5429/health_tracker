@@ -291,7 +291,9 @@ def chart_blood_tests():
         ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
         ax.set_ylim(ylim)
         ax.grid(True, alpha=0.15)
-        format_date_axis(ax, sub["date"])
+        # Sparse data (<=6 points): show exact dates, rotated
+        ax.set_xticks(sub["date"])
+        ax.set_xticklabels([d.strftime("%b\n%Y") for d in sub["date"]], fontsize=7)
 
     save(fig, "04_blood_biomarkers")
 
@@ -451,44 +453,50 @@ def chart_kpi_cards():
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# 7. Heatmap: Activity Calendar
+# 7. Multi-Variable Heatmap Calendar
 # ═══════════════════════════════════════════════════════════════════════════
 def chart_activity_heatmap():
     df = pd.read_csv(PROCESSED / "garmin_daily.csv", parse_dates=["date"])
-
-    fig, ax = plt.subplots(figsize=(18, 3.5))
-    fig.suptitle("Daily Steps Heatmap", fontsize=14, fontweight="bold",
-                 color=COLORS["accent"], y=0.98)
-
-    df["week"] = df["date"].dt.isocalendar().week.astype(int)
-    df["year"] = df["date"].dt.year
     df["dow"] = df["date"].dt.dayofweek  # 0=Mon
-
-    # Create a continuous week index
     df["week_idx"] = (df["date"] - df["date"].min()).dt.days // 7
 
-    pivot = df.pivot_table(index="dow", columns="week_idx", values="activity_steps", aggfunc="mean")
-    im = ax.pcolormesh(pivot.columns, pivot.index, pivot.values,
-                       cmap="YlGn", shading="nearest", edgecolors=COLORS["bg"], linewidth=1)
-    ax.set_yticks(range(7))
-    ax.set_yticklabels(["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], fontsize=8)
-    ax.invert_yaxis()
-    ax.set_xlabel("")
-    ax.set_xticks([])
+    heatmaps = [
+        ("activity_steps", "Steps", "YlGn"),
+        ("sleep_total_hours", "Sleep (hours)", "PuBu"),
+        ("sleep_score", "Sleep Score", "RdYlGn"),
+        ("activity_active_calories", "Active Calories", "YlOrRd"),
+        ("hrv_last_night_avg", "HRV (ms)", "BuGn"),
+        ("activity_resting_hr", "Resting HR (bpm)", "RdYlGn_r"),
+    ]
 
-    # Month labels
+    fig, axes = plt.subplots(6, 1, figsize=(18, 16), sharex=True)
+    fig.suptitle("Health Calendar Heatmaps", fontsize=16, fontweight="bold",
+                 color=COLORS["accent"], y=0.99)
+
+    # Month labels from first row only
     months = df.groupby(df["date"].dt.to_period("M")).first()
+
+    for ax, (col, title, cmap) in zip(axes, heatmaps):
+        pivot = df.pivot_table(index="dow", columns="week_idx", values=col, aggfunc="mean")
+        im = ax.pcolormesh(pivot.columns, pivot.index, pivot.values,
+                           cmap=cmap, shading="nearest", edgecolors=COLORS["bg"], linewidth=1)
+        ax.set_yticks(range(7))
+        ax.set_yticklabels(["M", "T", "W", "T", "F", "S", "S"], fontsize=7)
+        ax.invert_yaxis()
+        ax.set_xticks([])
+        ax.set_ylabel(title, fontsize=8, fontweight="bold", color=COLORS["text"], rotation=0,
+                      ha="right", va="center", labelpad=5)
+
+        cb = fig.colorbar(im, ax=ax, orientation="vertical", fraction=0.015, pad=0.01)
+        cb.ax.tick_params(labelsize=7, colors=COLORS["text_dim"])
+
+    # Month labels on top axis
     for _, row in months.iterrows():
-        ax.text(row["week_idx"], -0.8, row["date"].strftime("%b"), fontsize=8,
-                color=COLORS["text_dim"], ha="left")
+        axes[0].text(row["week_idx"], -1.0, row["date"].strftime("%b '%y"), fontsize=8,
+                     color=COLORS["text_dim"], ha="left")
 
-    cb = fig.colorbar(im, ax=ax, orientation="vertical", fraction=0.02, pad=0.02)
-    cb.set_label("Steps", fontsize=8, color=COLORS["text_dim"])
-    cb.ax.yaxis.set_tick_params(color=COLORS["text_dim"])
-    for t in cb.ax.get_yticklabels():
-        t.set_color(COLORS["text_dim"])
-
-    save(fig, "06_steps_heatmap")
+    fig.subplots_adjust(hspace=0.08)
+    save(fig, "06_health_heatmaps", tight=False)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -607,7 +615,7 @@ def main():
     chart_activity_heatmap()
     chart_correlations()
     chart_dexa_radar()
-    print(f"=== Done. {len(list(CHARTS.glob('*.svg')))} SVGs + PNGs in dashboard/charts/ ===")
+    print(f"=== Done. {len(list(CHARTS.glob('*.png')))} PNGs + SVGs in dashboard/charts/ ===")
 
 
 if __name__ == "__main__":
