@@ -1,197 +1,197 @@
 x_metric,y_metric,x_col,y_col,lag_days,correlation,p_value,significant,n
 Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,0,1.0,0.0,True,267
-Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,0,0.7719257578271248,4.6277406656057985e-54,True,267
-Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,0,0.1753964525834821,0.00411206182941781,True,266
-Sleep Hours,Steps,sleep_total_hours,activity_steps,0,0.03863679920385779,0.5296088549066731,False,267
-Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,0,0.10638781022425052,0.08271199597198882,False,267
-Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,0,-0.02652508953553659,0.6661296105575936,False,267
-Sleep Hours,Battery,sleep_total_hours,body_battery_charged,0,0.3117835770708841,1.9832532100408598e-07,True,267
-Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,0,0.7719257578271248,4.6277406656057985e-54,True,267
-Sleep Score,Sleep Score,sleep_score,sleep_score,0,0.9999999999999998,0.0,True,267
-Sleep Score,HRV,sleep_score,hrv_last_night_avg,0,0.30115509490768433,5.579237920950199e-07,True,266
-Sleep Score,Steps,sleep_score,activity_steps,0,0.06330941721877673,0.3026978857857565,False,267
-Sleep Score,Active Cal,sleep_score,activity_active_calories,0,0.10122105213617616,0.09885151827600411,False,267
-Sleep Score,Resting HR,sleep_score,activity_resting_hr,0,-0.1811779737478018,0.002966280463845341,True,267
-Sleep Score,Battery,sleep_score,body_battery_charged,0,0.4657130142397785,8.865842521445254e-16,True,267
-HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,0,0.17539645258348208,0.00411206182941781,True,266
-HRV,Sleep Score,hrv_last_night_avg,sleep_score,0,0.30115509490768433,5.579237920950199e-07,True,266
-HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,0,0.9999999999999999,0.0,True,267
-HRV,Steps,hrv_last_night_avg,activity_steps,0,0.1700935732958642,0.005325651151257646,True,267
-HRV,Active Cal,hrv_last_night_avg,activity_active_calories,0,0.019472328966748206,0.7514578299360378,False,267
-HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,0,-0.6416937752127518,2.214103247154708e-32,True,267
-HRV,Battery,hrv_last_night_avg,body_battery_charged,0,0.5193086960866011,7.68353093908656e-20,True,267
-Steps,Sleep Hours,activity_steps,sleep_total_hours,0,0.03863679920385778,0.5296088549066731,False,267
-Steps,Sleep Score,activity_steps,sleep_score,0,0.06330941721877674,0.3026978857857565,False,267
-Steps,HRV,activity_steps,hrv_last_night_avg,0,0.17009357329586422,0.005325651151257646,True,267
-Steps,Steps,activity_steps,activity_steps,0,0.9999999999999998,0.0,True,277
-Steps,Active Cal,activity_steps,activity_active_calories,0,0.6972210241509813,1.204155908161553e-41,True,277
-Steps,Resting HR,activity_steps,activity_resting_hr,0,-0.21944478903058787,0.00023255950128375137,True,277
-Steps,Battery,activity_steps,body_battery_charged,0,0.10551621861690709,0.07958560452342657,False,277
-Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,0,0.10638781022425052,0.08271199597198882,False,267
-Active Cal,Sleep Score,activity_active_calories,sleep_score,0,0.10122105213617615,0.09885151827600411,False,267
-Active Cal,HRV,activity_active_calories,hrv_last_night_avg,0,0.019472328966748206,0.7514578299360378,False,267
-Active Cal,Steps,activity_active_calories,activity_steps,0,0.6972210241509813,1.204155908161553e-41,True,277
+Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,0,0.7719257578271248,4.627740665605745e-54,True,267
+Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,0,0.1753964525834821,0.004112061829417744,True,266
+Sleep Hours,Steps,sleep_total_hours,activity_steps,0,0.038636799203857805,0.5296088549066723,False,267
+Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,0,0.10638781022425052,0.08271199597198994,False,267
+Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,0,-0.026525089535536586,0.6661296105575932,False,267
+Sleep Hours,Battery,sleep_total_hours,body_battery_charged,0,0.31178357707088405,1.9832532100409122e-07,True,267
+Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,0,0.7719257578271248,4.627740665605745e-54,True,267
+Sleep Score,Sleep Score,sleep_score,sleep_score,0,1.0,0.0,True,267
+Sleep Score,HRV,sleep_score,hrv_last_night_avg,0,0.30115509490768433,5.579237920950279e-07,True,266
+Sleep Score,Steps,sleep_score,activity_steps,0,0.06330941721877673,0.3026978857857576,False,267
+Sleep Score,Active Cal,sleep_score,activity_active_calories,0,0.10122105213617616,0.09885151827600477,False,267
+Sleep Score,Resting HR,sleep_score,activity_resting_hr,0,-0.18117797374780184,0.0029662804638453124,True,267
+Sleep Score,Battery,sleep_score,body_battery_charged,0,0.4657130142397785,8.86584252144504e-16,True,267
+HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,0,0.1753964525834821,0.004112061829417744,True,266
+HRV,Sleep Score,hrv_last_night_avg,sleep_score,0,0.30115509490768433,5.579237920950279e-07,True,266
+HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,0,0.9999999999999998,0.0,True,267
+HRV,Steps,hrv_last_night_avg,activity_steps,0,0.17009357329586416,0.005325651151257676,True,267
+HRV,Active Cal,hrv_last_night_avg,activity_active_calories,0,0.019472328966748206,0.7514578299360364,False,267
+HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,0,-0.6416937752127521,2.2141032471545374e-32,True,267
+HRV,Battery,hrv_last_night_avg,body_battery_charged,0,0.5193086960866009,7.683530939086693e-20,True,267
+Steps,Sleep Hours,activity_steps,sleep_total_hours,0,0.038636799203857805,0.5296088549066723,False,267
+Steps,Sleep Score,activity_steps,sleep_score,0,0.06330941721877673,0.3026978857857576,False,267
+Steps,HRV,activity_steps,hrv_last_night_avg,0,0.17009357329586416,0.005325651151257676,True,267
+Steps,Steps,activity_steps,activity_steps,0,0.9999999999999999,0.0,True,277
+Steps,Active Cal,activity_steps,activity_active_calories,0,0.6972210241509812,1.2041559081616653e-41,True,277
+Steps,Resting HR,activity_steps,activity_resting_hr,0,-0.21944478903058787,0.00023255950128374668,True,277
+Steps,Battery,activity_steps,body_battery_charged,0,0.1055162186169071,0.0795856045234266,False,277
+Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,0,0.10638781022425052,0.08271199597198994,False,267
+Active Cal,Sleep Score,activity_active_calories,sleep_score,0,0.10122105213617616,0.09885151827600477,False,267
+Active Cal,HRV,activity_active_calories,hrv_last_night_avg,0,0.019472328966748206,0.7514578299360364,False,267
+Active Cal,Steps,activity_active_calories,activity_steps,0,0.6972210241509812,1.2041559081616653e-41,True,277
 Active Cal,Active Cal,activity_active_calories,activity_active_calories,0,1.0,0.0,True,277
-Active Cal,Resting HR,activity_active_calories,activity_resting_hr,0,0.0816192021985393,0.17556658128961633,False,277
-Active Cal,Battery,activity_active_calories,body_battery_charged,0,0.05167517533976322,0.3915942758369847,False,277
-Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,0,-0.026525089535536575,0.6661296105575936,False,267
-Resting HR,Sleep Score,activity_resting_hr,sleep_score,0,-0.18117797374780184,0.002966280463845341,True,267
-Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,0,-0.641693775212752,2.214103247154708e-32,True,267
-Resting HR,Steps,activity_resting_hr,activity_steps,0,-0.2194447890305879,0.00023255950128375137,True,277
-Resting HR,Active Cal,activity_resting_hr,activity_active_calories,0,0.0816192021985393,0.17556658128961633,False,277
+Active Cal,Resting HR,activity_active_calories,activity_resting_hr,0,0.08161920219853933,0.1755665812896146,False,277
+Active Cal,Battery,activity_active_calories,body_battery_charged,0,0.05167517533976322,0.39159427583698564,False,277
+Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,0,-0.026525089535536586,0.6661296105575932,False,267
+Resting HR,Sleep Score,activity_resting_hr,sleep_score,0,-0.18117797374780184,0.0029662804638453124,True,267
+Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,0,-0.6416937752127521,2.2141032471545374e-32,True,267
+Resting HR,Steps,activity_resting_hr,activity_steps,0,-0.21944478903058787,0.00023255950128374668,True,277
+Resting HR,Active Cal,activity_resting_hr,activity_active_calories,0,0.08161920219853933,0.1755665812896146,False,277
 Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,0,1.0,0.0,True,277
-Resting HR,Battery,activity_resting_hr,body_battery_charged,0,-0.4650859339032862,2.8449014027628546e-16,True,277
-Battery,Sleep Hours,body_battery_charged,sleep_total_hours,0,0.3117835770708841,1.9832532100408598e-07,True,267
-Battery,Sleep Score,body_battery_charged,sleep_score,0,0.4657130142397785,8.865842521445254e-16,True,267
-Battery,HRV,body_battery_charged,hrv_last_night_avg,0,0.5193086960866011,7.68353093908656e-20,True,267
-Battery,Steps,body_battery_charged,activity_steps,0,0.1055162186169071,0.07958560452342657,False,277
-Battery,Active Cal,body_battery_charged,activity_active_calories,0,0.05167517533976324,0.3915942758369847,False,277
-Battery,Resting HR,body_battery_charged,activity_resting_hr,0,-0.4650859339032862,2.8449014027628546e-16,True,277
+Resting HR,Battery,activity_resting_hr,body_battery_charged,0,-0.4650859339032861,2.8449014027629586e-16,True,277
+Battery,Sleep Hours,body_battery_charged,sleep_total_hours,0,0.31178357707088405,1.9832532100409122e-07,True,267
+Battery,Sleep Score,body_battery_charged,sleep_score,0,0.4657130142397785,8.86584252144504e-16,True,267
+Battery,HRV,body_battery_charged,hrv_last_night_avg,0,0.5193086960866009,7.683530939086693e-20,True,267
+Battery,Steps,body_battery_charged,activity_steps,0,0.1055162186169071,0.0795856045234266,False,277
+Battery,Active Cal,body_battery_charged,activity_active_calories,0,0.05167517533976322,0.39159427583698564,False,277
+Battery,Resting HR,body_battery_charged,activity_resting_hr,0,-0.4650859339032861,2.8449014027629586e-16,True,277
 Battery,Battery,body_battery_charged,body_battery_charged,0,1.0,0.0,True,277
-Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,1,0.03998681265394244,0.5241816530094149,False,256
-Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,1,-0.057549977344032076,0.35911449544942914,False,256
-Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,1,-0.1970422861223192,0.0015003782749425224,True,257
-Sleep Hours,Steps,sleep_total_hours,activity_steps,1,0.04456327945081834,0.4700687113436226,False,265
-Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,1,0.14460814290974944,0.018507009681524075,True,265
-Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,1,0.12396068495963752,0.043781449360180844,True,265
-Sleep Hours,Battery,sleep_total_hours,body_battery_charged,1,-0.14568597514832984,0.017641432820560916,True,265
-Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,1,0.0525632297119388,0.4023256053106263,False,256
-Sleep Score,Sleep Score,sleep_score,sleep_score,1,0.03316613832719473,0.5973559382841276,False,256
-Sleep Score,HRV,sleep_score,hrv_last_night_avg,1,-0.12958693261923981,0.037887357414981324,True,257
-Sleep Score,Steps,sleep_score,activity_steps,1,0.09040852200952719,0.14216011643038984,False,265
-Sleep Score,Active Cal,sleep_score,activity_active_calories,1,0.123068665100719,0.045332388061927235,True,265
-Sleep Score,Resting HR,sleep_score,activity_resting_hr,1,0.014000302237962003,0.8205464893562708,False,265
-Sleep Score,Battery,sleep_score,body_battery_charged,1,-0.06233469767159075,0.31205381766133833,False,265
-HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,1,-0.12770101858431276,0.0411928984763416,True,256
-HRV,Sleep Score,hrv_last_night_avg,sleep_score,1,-0.2176108899378337,0.00045343852327490763,True,256
-HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,1,0.39727810489903137,4.14144802472537e-11,True,256
-HRV,Steps,hrv_last_night_avg,activity_steps,1,0.25733090071187903,2.2264844713440362e-05,True,265
-HRV,Active Cal,hrv_last_night_avg,activity_active_calories,1,0.05461367875960689,0.37588453829123153,False,265
-HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,1,-0.4470188161506515,2.012131611108911e-14,True,265
-HRV,Battery,hrv_last_night_avg,body_battery_charged,1,0.09078051770796822,0.1405196461622044,False,265
-Steps,Sleep Hours,activity_steps,sleep_total_hours,1,-0.045629779832352516,0.4586446170879567,False,266
-Steps,Sleep Score,activity_steps,sleep_score,1,-0.056908034384191716,0.3552154435466369,False,266
-Steps,HRV,activity_steps,hrv_last_night_avg,1,0.15728808495830832,0.010192727346846495,True,266
-Steps,Steps,activity_steps,activity_steps,1,0.1980198757238808,0.0009614055573761395,True,275
-Steps,Active Cal,activity_steps,activity_active_calories,1,0.13242242619655598,0.028116784239268635,True,275
-Steps,Resting HR,activity_steps,activity_resting_hr,1,-0.10935629297271976,0.0701961993892318,False,275
-Steps,Battery,activity_steps,body_battery_charged,1,0.1500381077384585,0.012742604824158425,True,275
-Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,1,0.001298477045033844,0.9831835986051779,False,266
-Active Cal,Sleep Score,activity_active_calories,sleep_score,1,-0.04623591343344566,0.4526915870819977,False,266
-Active Cal,HRV,activity_active_calories,hrv_last_night_avg,1,-0.05057616944279246,0.4113537948143338,False,266
-Active Cal,Steps,activity_active_calories,activity_steps,1,0.13128611958371678,0.029506928350943925,True,275
-Active Cal,Active Cal,activity_active_calories,activity_active_calories,1,0.3104025698656788,1.485448541623263e-07,True,275
-Active Cal,Resting HR,activity_active_calories,activity_resting_hr,1,0.1960383589828112,0.0010835378053430861,True,275
-Active Cal,Battery,activity_active_calories,body_battery_charged,1,0.11321336124433967,0.06080486088920724,False,275
-Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,1,0.1331813503339146,0.029887703534926258,True,266
-Resting HR,Sleep Score,activity_resting_hr,sleep_score,1,0.1110185059042671,0.07064980050256306,False,266
-Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,1,-0.38116390758748725,1.2613632160860476e-10,True,266
-Resting HR,Steps,activity_resting_hr,activity_steps,1,-0.22162916756351417,0.0002116074361064232,True,275
-Resting HR,Active Cal,activity_resting_hr,activity_active_calories,1,0.09458492284348813,0.11761124811894637,False,275
-Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,1,0.6902712632440661,3.0043290944146846e-40,True,275
-Resting HR,Battery,activity_resting_hr,body_battery_charged,1,-0.10522676611297209,0.08152961048631904,False,275
-Battery,Sleep Hours,body_battery_charged,sleep_total_hours,1,0.03713762244321103,0.5464741764541471,False,266
-Battery,Sleep Score,body_battery_charged,sleep_score,1,0.019294532003816638,0.7541048110273763,False,266
-Battery,HRV,body_battery_charged,hrv_last_night_avg,1,0.33924280657827005,1.3785321389147934e-08,True,266
-Battery,Steps,body_battery_charged,activity_steps,1,0.22725017930370955,0.00014399471419922978,True,275
-Battery,Active Cal,body_battery_charged,activity_active_calories,1,0.1493503422592567,0.013162764776215474,True,275
-Battery,Resting HR,body_battery_charged,activity_resting_hr,1,-0.2573911075559874,1.5465936935334684e-05,True,275
-Battery,Battery,body_battery_charged,body_battery_charged,1,0.15316792253973305,0.010976107539367456,True,275
-Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,2,0.20923084182905471,0.0007737394251788467,True,255
-Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,2,0.1461391311843306,0.01955713145421638,True,255
-Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,2,-0.06747411345856821,0.28308932786212426,False,255
-Sleep Hours,Steps,sleep_total_hours,activity_steps,2,0.0909369711415329,0.14059081578721144,False,264
-Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,2,0.14974173259368784,0.014882913884021428,True,264
-Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,2,0.061677441706457115,0.31811681673576103,False,264
-Sleep Hours,Battery,sleep_total_hours,body_battery_charged,2,0.12137954306092313,0.04882508851170482,True,264
-Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,2,0.15387434807974398,0.013902572674244667,True,255
-Sleep Score,Sleep Score,sleep_score,sleep_score,2,0.12881393539461758,0.03983474068836224,True,255
-Sleep Score,HRV,sleep_score,hrv_last_night_avg,2,-0.07651110635616987,0.22338847515679838,False,255
-Sleep Score,Steps,sleep_score,activity_steps,2,0.09162572477485174,0.1375961694193487,False,264
-Sleep Score,Active Cal,sleep_score,activity_active_calories,2,0.13831838102223587,0.02460442777884034,True,264
-Sleep Score,Resting HR,sleep_score,activity_resting_hr,2,0.0039016143456594293,0.9496923259733426,False,264
-Sleep Score,Battery,sleep_score,body_battery_charged,2,0.07953568984732556,0.19767236079108283,False,264
-HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,2,-0.046003180459913834,0.4645409622018952,False,255
-HRV,Sleep Score,hrv_last_night_avg,sleep_score,2,-0.07354467764235256,0.24190851471245065,False,255
-HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,2,0.39321887987102283,7.386821432749206e-11,True,255
-HRV,Steps,hrv_last_night_avg,activity_steps,2,0.2415737080212698,7.328193505978476e-05,True,264
-HRV,Active Cal,hrv_last_night_avg,activity_active_calories,2,0.06024214655086889,0.3295303980094078,False,264
-HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,2,-0.4200469153802846,1.0419022771401125e-12,True,264
-HRV,Battery,hrv_last_night_avg,body_battery_charged,2,0.17718381940208547,0.0038755043324149394,True,264
-Steps,Sleep Hours,activity_steps,sleep_total_hours,2,-0.03637313901136269,0.5562746292354418,False,264
-Steps,Sleep Score,activity_steps,sleep_score,2,0.024088425846604825,0.6968398153305996,False,264
-Steps,HRV,activity_steps,hrv_last_night_avg,2,0.23843296128714397,9.1434014918289e-05,True,264
-Steps,Steps,activity_steps,activity_steps,2,0.17870023477020192,0.0029933272339429974,True,274
-Steps,Active Cal,activity_steps,activity_active_calories,2,0.03409318496956815,0.5741664094704295,False,274
-Steps,Resting HR,activity_steps,activity_resting_hr,2,-0.18168314546697056,0.002537729121139394,True,274
-Steps,Battery,activity_steps,body_battery_charged,2,0.22262948041395222,0.00020315749751132145,True,274
-Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,2,-0.03464201231832905,0.5752315941809396,False,264
-Active Cal,Sleep Score,activity_active_calories,sleep_score,2,-0.013244386973916663,0.8304035216590887,False,264
-Active Cal,HRV,activity_active_calories,hrv_last_night_avg,2,0.013699294826290245,0.8246709269496453,False,264
-Active Cal,Steps,activity_active_calories,activity_steps,2,0.07897774950438836,0.1924469163638576,False,274
-Active Cal,Active Cal,activity_active_calories,activity_active_calories,2,0.18013171250388754,0.002766157506912747,True,274
-Active Cal,Resting HR,activity_active_calories,activity_resting_hr,2,0.13771006215003187,0.022610115836498718,True,274
-Active Cal,Battery,activity_active_calories,body_battery_charged,2,0.1653688944722329,0.006074289762749185,True,274
-Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,2,0.12698008461220656,0.03923202927023636,True,264
-Resting HR,Sleep Score,activity_resting_hr,sleep_score,2,0.05843437049179307,0.3442765099743401,False,264
-Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,2,-0.334103631334296,2.6446253439628872e-08,True,264
-Resting HR,Steps,activity_resting_hr,activity_steps,2,-0.1673227595802117,0.005492671208223778,True,274
-Resting HR,Active Cal,activity_resting_hr,activity_active_calories,2,0.17458048369940576,0.0037446850282290625,True,274
-Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,2,0.6496217903969337,3.0957913857550125e-34,True,274
-Resting HR,Battery,activity_resting_hr,body_battery_charged,2,-0.1642138954470653,0.0064434974525109465,True,274
-Battery,Sleep Hours,body_battery_charged,sleep_total_hours,2,0.1027620477239305,0.09567828467232033,False,264
-Battery,Sleep Score,body_battery_charged,sleep_score,2,0.06936936581365166,0.26138489432549805,False,264
-Battery,HRV,body_battery_charged,hrv_last_night_avg,2,0.1970890333010084,0.0012875013332529395,True,264
-Battery,Steps,body_battery_charged,activity_steps,2,0.21913619343500323,0.00025688797359390626,True,274
-Battery,Active Cal,body_battery_charged,activity_active_calories,2,0.13884821874784473,0.021505703219322946,True,274
-Battery,Resting HR,body_battery_charged,activity_resting_hr,2,-0.20506375494268886,0.0006372194490343137,True,274
-Battery,Battery,body_battery_charged,body_battery_charged,2,0.1907055647361407,0.0015167286511348235,True,274
-Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,3,0.04534076489535796,0.4718829647214932,False,254
-Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,3,-0.062845046703268,0.3184580974133897,False,254
-Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,3,-0.1606775462974623,0.010322518145264348,True,254
-Sleep Hours,Steps,sleep_total_hours,activity_steps,3,0.015603537061549877,0.8011517137948252,False,263
-Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,3,0.059214167489165914,0.33879044494701765,False,263
-Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,3,0.15743591297096382,0.010558361253157194,True,263
-Sleep Hours,Battery,sleep_total_hours,body_battery_charged,3,-0.12609821723718043,0.04101363490969209,True,263
-Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,3,0.060863446150078174,0.3339865404019022,False,254
-Sleep Score,Sleep Score,sleep_score,sleep_score,3,-0.012660005003290009,0.8408705082087388,False,254
-Sleep Score,HRV,sleep_score,hrv_last_night_avg,3,-0.15483697187906117,0.013494687911036758,True,254
-Sleep Score,Steps,sleep_score,activity_steps,3,0.07986005937147603,0.19670144907251558,False,263
-Sleep Score,Active Cal,sleep_score,activity_active_calories,3,0.06653094875349619,0.2823734586196213,False,263
-Sleep Score,Resting HR,sleep_score,activity_resting_hr,3,0.04745383956078279,0.44347514870111543,False,263
-Sleep Score,Battery,sleep_score,body_battery_charged,3,0.009211218268803039,0.8818120866384193,False,263
-HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,3,-0.050560595791639885,0.42235512900257793,False,254
-HRV,Sleep Score,hrv_last_night_avg,sleep_score,3,-0.08473627390561486,0.17822664561069945,False,254
-HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,3,0.37439656297074164,7.134483317953955e-10,True,254
-HRV,Steps,hrv_last_night_avg,activity_steps,3,0.19778915907631373,0.001263103190334582,True,263
-HRV,Active Cal,hrv_last_night_avg,activity_active_calories,3,0.011794916468567822,0.8490138001298959,False,263
-HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,3,-0.4235820985584696,7.106765101767389e-13,True,263
-HRV,Battery,hrv_last_night_avg,body_battery_charged,3,0.2324121642459045,0.00014275324467959066,True,263
-Steps,Sleep Hours,activity_steps,sleep_total_hours,3,-0.050513312447231284,0.414610416648499,False,263
-Steps,Sleep Score,activity_steps,sleep_score,3,-0.03615123139155147,0.559440540577707,False,263
-Steps,HRV,activity_steps,hrv_last_night_avg,3,0.20001129903294662,0.0011094058161631812,True,263
-Steps,Steps,activity_steps,activity_steps,3,0.13986948495612175,0.020789006715116184,True,273
-Steps,Active Cal,activity_steps,activity_active_calories,3,0.004331705739664359,0.9432039948958099,False,273
-Steps,Resting HR,activity_steps,activity_resting_hr,3,-0.17550613389848402,0.003624183779992765,True,273
-Steps,Battery,activity_steps,body_battery_charged,3,0.1765948342476242,0.0034172169684923547,True,273
-Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,3,-0.016273380580189418,0.7928047848456485,False,263
-Active Cal,Sleep Score,activity_active_calories,sleep_score,3,-0.04088725241226475,0.509127086444651,False,263
-Active Cal,HRV,activity_active_calories,hrv_last_night_avg,3,0.028033484327708157,0.650872692862408,False,263
-Active Cal,Steps,activity_active_calories,activity_steps,3,0.04084873052360245,0.5015101608749793,False,273
-Active Cal,Active Cal,activity_active_calories,activity_active_calories,3,0.08518785759884497,0.16042943034956328,False,273
-Active Cal,Resting HR,activity_active_calories,activity_resting_hr,3,0.15668948678801267,0.009511715180271779,True,273
-Active Cal,Battery,activity_active_calories,body_battery_charged,3,0.15824223366389323,0.008815784857652463,True,273
-Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,3,0.13559641958647692,0.02789965890444354,True,263
-Resting HR,Sleep Score,activity_resting_hr,sleep_score,3,0.10848016779036866,0.07907839142788686,False,263
-Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,3,-0.3377620687447155,1.9380847097922578e-08,True,263
-Resting HR,Steps,activity_resting_hr,activity_steps,3,-0.1064302093790733,0.07918475688001513,False,273
-Resting HR,Active Cal,activity_resting_hr,activity_active_calories,3,0.2156230309108691,0.0003324137402128991,True,273
-Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,3,0.6285008178568994,2.046007406169812e-31,True,273
-Resting HR,Battery,activity_resting_hr,body_battery_charged,3,-0.11200844922697463,0.06460075889172509,False,273
-Battery,Sleep Hours,body_battery_charged,sleep_total_hours,3,0.00438513636015176,0.9435755868551059,False,263
-Battery,Sleep Score,body_battery_charged,sleep_score,3,-0.06079457859977047,0.32603338685331923,False,263
-Battery,HRV,body_battery_charged,hrv_last_night_avg,3,0.18603286396355437,0.0024531504683353088,True,263
-Battery,Steps,body_battery_charged,activity_steps,3,0.150493009546153,0.012798175159441203,True,273
-Battery,Active Cal,body_battery_charged,activity_active_calories,3,0.09679597873787862,0.11054621827300032,False,273
-Battery,Resting HR,body_battery_charged,activity_resting_hr,3,-0.19477770852278053,0.0012184595245359011,True,273
-Battery,Battery,body_battery_charged,body_battery_charged,3,0.12636830610695524,0.036911720813857685,True,273
+Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,1,0.039986812653942445,0.5241816530094183,False,256
+Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,1,-0.05754997734403209,0.3591144954494278,False,256
+Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,1,-0.19704228612231922,0.0015003782749425062,True,257
+Sleep Hours,Steps,sleep_total_hours,activity_steps,1,0.044563279450818345,0.47006871134361966,False,265
+Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,1,0.1446081429097495,0.018507009681523686,True,265
+Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,1,0.12396068495963751,0.04378144936018086,True,265
+Sleep Hours,Battery,sleep_total_hours,body_battery_charged,1,-0.14568597514832984,0.017641432820560857,True,265
+Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,1,0.0525632297119388,0.40232560531062905,False,256
+Sleep Score,Sleep Score,sleep_score,sleep_score,1,0.03316613832719473,0.5973559382841309,False,256
+Sleep Score,HRV,sleep_score,hrv_last_night_avg,1,-0.12958693261923984,0.037887357414981566,True,257
+Sleep Score,Steps,sleep_score,activity_steps,1,0.0904085220095272,0.14216011643039006,False,265
+Sleep Score,Active Cal,sleep_score,activity_active_calories,1,0.12306866510071902,0.045332388061926764,True,265
+Sleep Score,Resting HR,sleep_score,activity_resting_hr,1,0.014000302237962014,0.8205464893562692,False,265
+Sleep Score,Battery,sleep_score,body_battery_charged,1,-0.062334697671590764,0.31205381766134044,False,265
+HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,1,-0.12770101858431276,0.0411928984763412,True,256
+HRV,Sleep Score,hrv_last_night_avg,sleep_score,1,-0.2176108899378337,0.00045343852327490785,True,256
+HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,1,0.39727810489903137,4.141448024725347e-11,True,256
+HRV,Steps,hrv_last_night_avg,activity_steps,1,0.25733090071187903,2.2264844713440037e-05,True,265
+HRV,Active Cal,hrv_last_night_avg,activity_active_calories,1,0.05461367875960688,0.3758845382912324,False,265
+HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,1,-0.4470188161506515,2.0121316111088996e-14,True,265
+HRV,Battery,hrv_last_night_avg,body_battery_charged,1,0.09078051770796819,0.14051964616220497,False,265
+Steps,Sleep Hours,activity_steps,sleep_total_hours,1,-0.04562977983235251,0.45864461708795756,False,266
+Steps,Sleep Score,activity_steps,sleep_score,1,-0.056908034384191716,0.35521544354663626,False,266
+Steps,HRV,activity_steps,hrv_last_night_avg,1,0.1572880849583083,0.010192727346846427,True,266
+Steps,Steps,activity_steps,activity_steps,1,0.19801987572388083,0.0009614055573761396,True,275
+Steps,Active Cal,activity_steps,activity_active_calories,1,0.13242242619655603,0.02811678423926845,True,275
+Steps,Resting HR,activity_steps,activity_resting_hr,1,-0.10935629297271977,0.07019619938923202,False,275
+Steps,Battery,activity_steps,body_battery_charged,1,0.1500381077384585,0.012742604824158258,True,275
+Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,1,0.0012984770450338485,0.9831835986051775,False,266
+Active Cal,Sleep Score,activity_active_calories,sleep_score,1,-0.046235913433445665,0.45269158708199503,False,266
+Active Cal,HRV,activity_active_calories,hrv_last_night_avg,1,-0.05057616944279246,0.41135379481433343,False,266
+Active Cal,Steps,activity_active_calories,activity_steps,1,0.13128611958371678,0.02950692835094394,True,275
+Active Cal,Active Cal,activity_active_calories,activity_active_calories,1,0.3104025698656788,1.485448541623272e-07,True,275
+Active Cal,Resting HR,activity_active_calories,activity_resting_hr,1,0.1960383589828112,0.001083537805343087,True,275
+Active Cal,Battery,activity_active_calories,body_battery_charged,1,0.1132133612443397,0.06080486088920678,False,275
+Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,1,0.1331813503339146,0.02988770353492622,True,266
+Resting HR,Sleep Score,activity_resting_hr,sleep_score,1,0.11101850590426708,0.07064980050256219,False,266
+Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,1,-0.3811639075874873,1.2613632160860179e-10,True,266
+Resting HR,Steps,activity_resting_hr,activity_steps,1,-0.22162916756351417,0.0002116074361064218,True,275
+Resting HR,Active Cal,activity_resting_hr,activity_active_calories,1,0.09458492284348813,0.11761124811894809,False,275
+Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,1,0.6902712632440661,3.004329094414654e-40,True,275
+Resting HR,Battery,activity_resting_hr,body_battery_charged,1,-0.10522676611297209,0.08152961048631889,False,275
+Battery,Sleep Hours,body_battery_charged,sleep_total_hours,1,0.037137622443211046,0.5464741764541459,False,266
+Battery,Sleep Score,body_battery_charged,sleep_score,1,0.01929453200381661,0.7541048110273777,False,266
+Battery,HRV,body_battery_charged,hrv_last_night_avg,1,0.33924280657827005,1.3785321389148068e-08,True,266
+Battery,Steps,body_battery_charged,activity_steps,1,0.22725017930370955,0.0001439947141992305,True,275
+Battery,Active Cal,body_battery_charged,activity_active_calories,1,0.14935034225925664,0.013162764776215578,True,275
+Battery,Resting HR,body_battery_charged,activity_resting_hr,1,-0.2573911075559874,1.5465936935334782e-05,True,275
+Battery,Battery,body_battery_charged,body_battery_charged,1,0.15316792253973305,0.010976107539367426,True,275
+Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,2,0.20923084182905466,0.0007737394251788518,True,255
+Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,2,0.14613913118433056,0.019557131454216437,True,255
+Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,2,-0.06747411345856821,0.28308932786212243,False,255
+Sleep Hours,Steps,sleep_total_hours,activity_steps,2,0.09093697114153293,0.14059081578721144,False,264
+Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,2,0.1497417325936878,0.014882913884021406,True,264
+Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,2,0.06167744170645711,0.3181168167357596,False,264
+Sleep Hours,Battery,sleep_total_hours,body_battery_charged,2,0.12137954306092316,0.048825088511705146,True,264
+Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,2,0.15387434807974393,0.013902572674244674,True,255
+Sleep Score,Sleep Score,sleep_score,sleep_score,2,0.12881393539461755,0.039834740688362145,True,255
+Sleep Score,HRV,sleep_score,hrv_last_night_avg,2,-0.0765111063561699,0.22338847515680182,False,255
+Sleep Score,Steps,sleep_score,activity_steps,2,0.09162572477485176,0.13759616941934885,False,264
+Sleep Score,Active Cal,sleep_score,activity_active_calories,2,0.1383183810222359,0.024604427778840254,True,264
+Sleep Score,Resting HR,sleep_score,activity_resting_hr,2,0.003901614345659433,0.9496923259733413,False,264
+Sleep Score,Battery,sleep_score,body_battery_charged,2,0.07953568984732555,0.19767236079108116,False,264
+HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,2,-0.046003180459913875,0.4645409622018944,False,255
+HRV,Sleep Score,hrv_last_night_avg,sleep_score,2,-0.07354467764235258,0.24190851471245184,False,255
+HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,2,0.39321887987102294,7.386821432748881e-11,True,255
+HRV,Steps,hrv_last_night_avg,activity_steps,2,0.24157370802126976,7.328193505978536e-05,True,264
+HRV,Active Cal,hrv_last_night_avg,activity_active_calories,2,0.06024214655086891,0.32953039800940864,False,264
+HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,2,-0.4200469153802846,1.0419022771401006e-12,True,264
+HRV,Battery,hrv_last_night_avg,body_battery_charged,2,0.17718381940208544,0.0038755043324149255,True,264
+Steps,Sleep Hours,activity_steps,sleep_total_hours,2,-0.03637313901136267,0.5562746292354439,False,264
+Steps,Sleep Score,activity_steps,sleep_score,2,0.024088425846604845,0.6968398153305956,False,264
+Steps,HRV,activity_steps,hrv_last_night_avg,2,0.23843296128714395,9.143401491829202e-05,True,264
+Steps,Steps,activity_steps,activity_steps,2,0.17870023477020192,0.0029933272339429905,True,274
+Steps,Active Cal,activity_steps,activity_active_calories,2,0.03409318496956813,0.5741664094704312,False,274
+Steps,Resting HR,activity_steps,activity_resting_hr,2,-0.18168314546697056,0.0025377291211393874,True,274
+Steps,Battery,activity_steps,body_battery_charged,2,0.2226294804139522,0.0002031574975113182,True,274
+Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,2,-0.03464201231832905,0.5752315941809394,False,264
+Active Cal,Sleep Score,activity_active_calories,sleep_score,2,-0.013244386973916663,0.830403521659089,False,264
+Active Cal,HRV,activity_active_calories,hrv_last_night_avg,2,0.013699294826290242,0.8246709269496435,False,264
+Active Cal,Steps,activity_active_calories,activity_steps,2,0.07897774950438835,0.19244691636385858,False,274
+Active Cal,Active Cal,activity_active_calories,activity_active_calories,2,0.18013171250388754,0.0027661575069127574,True,274
+Active Cal,Resting HR,activity_active_calories,activity_resting_hr,2,0.1377100621500319,0.02261011583649859,True,274
+Active Cal,Battery,activity_active_calories,body_battery_charged,2,0.1653688944722329,0.006074289762749124,True,274
+Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,2,0.12698008461220656,0.03923202927023682,True,264
+Resting HR,Sleep Score,activity_resting_hr,sleep_score,2,0.058434370491793085,0.3442765099743381,False,264
+Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,2,-0.33410363133429594,2.644625343962865e-08,True,264
+Resting HR,Steps,activity_resting_hr,activity_steps,2,-0.16732275958021164,0.005492671208223804,True,274
+Resting HR,Active Cal,activity_resting_hr,activity_active_calories,2,0.17458048369940576,0.0037446850282290894,True,274
+Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,2,0.6496217903969335,3.095791385755144e-34,True,274
+Resting HR,Battery,activity_resting_hr,body_battery_charged,2,-0.1642138954470653,0.006443497452510947,True,274
+Battery,Sleep Hours,body_battery_charged,sleep_total_hours,2,0.1027620477239305,0.09567828467231984,False,264
+Battery,Sleep Score,body_battery_charged,sleep_score,2,0.06936936581365166,0.26138489432550116,False,264
+Battery,HRV,body_battery_charged,hrv_last_night_avg,2,0.19708903330100844,0.001287501333252928,True,264
+Battery,Steps,body_battery_charged,activity_steps,2,0.2191361934350032,0.00025688797359391455,True,274
+Battery,Active Cal,body_battery_charged,activity_active_calories,2,0.13884821874784473,0.021505703219322738,True,274
+Battery,Resting HR,body_battery_charged,activity_resting_hr,2,-0.20506375494268886,0.0006372194490343049,True,274
+Battery,Battery,body_battery_charged,body_battery_charged,2,0.19070556473614073,0.0015167286511348222,True,274
+Sleep Hours,Sleep Hours,sleep_total_hours,sleep_total_hours,3,0.04534076489535796,0.4718829647214913,False,254
+Sleep Hours,Sleep Score,sleep_total_hours,sleep_score,3,-0.062845046703268,0.31845809741339215,False,254
+Sleep Hours,HRV,sleep_total_hours,hrv_last_night_avg,3,-0.16067754629746236,0.010322518145264336,True,254
+Sleep Hours,Steps,sleep_total_hours,activity_steps,3,0.015603537061549886,0.8011517137948259,False,263
+Sleep Hours,Active Cal,sleep_total_hours,activity_active_calories,3,0.0592141674891659,0.33879044494701915,False,263
+Sleep Hours,Resting HR,sleep_total_hours,activity_resting_hr,3,0.15743591297096374,0.010558361253157218,True,263
+Sleep Hours,Battery,sleep_total_hours,body_battery_charged,3,-0.1260982172371804,0.04101363490969279,True,263
+Sleep Score,Sleep Hours,sleep_score,sleep_total_hours,3,0.06086344615007817,0.33398654040190057,False,254
+Sleep Score,Sleep Score,sleep_score,sleep_score,3,-0.012660005003290007,0.8408705082087421,False,254
+Sleep Score,HRV,sleep_score,hrv_last_night_avg,3,-0.15483697187906117,0.013494687911036852,True,254
+Sleep Score,Steps,sleep_score,activity_steps,3,0.07986005937147604,0.19670144907251516,False,263
+Sleep Score,Active Cal,sleep_score,activity_active_calories,3,0.06653094875349617,0.28237345861961993,False,263
+Sleep Score,Resting HR,sleep_score,activity_resting_hr,3,0.047453839560782814,0.44347514870111593,False,263
+Sleep Score,Battery,sleep_score,body_battery_charged,3,0.00921121826880302,0.8818120866384209,False,263
+HRV,Sleep Hours,hrv_last_night_avg,sleep_total_hours,3,-0.050560595791639885,0.42235512900257943,False,254
+HRV,Sleep Score,hrv_last_night_avg,sleep_score,3,-0.08473627390561485,0.17822664561069984,False,254
+HRV,HRV,hrv_last_night_avg,hrv_last_night_avg,3,0.37439656297074164,7.13448331795399e-10,True,254
+HRV,Steps,hrv_last_night_avg,activity_steps,3,0.19778915907631375,0.0012631031903345528,True,263
+HRV,Active Cal,hrv_last_night_avg,activity_active_calories,3,0.011794916468567816,0.8490138001298964,False,263
+HRV,Resting HR,hrv_last_night_avg,activity_resting_hr,3,-0.4235820985584696,7.106765101767362e-13,True,263
+HRV,Battery,hrv_last_night_avg,body_battery_charged,3,0.2324121642459045,0.00014275324467959087,True,263
+Steps,Sleep Hours,activity_steps,sleep_total_hours,3,-0.05051331244723129,0.41461041664849885,False,263
+Steps,Sleep Score,activity_steps,sleep_score,3,-0.03615123139155146,0.5594405405777029,False,263
+Steps,HRV,activity_steps,hrv_last_night_avg,3,0.20001129903294665,0.001109405816163183,True,263
+Steps,Steps,activity_steps,activity_steps,3,0.13986948495612175,0.020789006715116215,True,273
+Steps,Active Cal,activity_steps,activity_active_calories,3,0.004331705739664353,0.943203994895811,False,273
+Steps,Resting HR,activity_steps,activity_resting_hr,3,-0.17550613389848402,0.00362418377999273,True,273
+Steps,Battery,activity_steps,body_battery_charged,3,0.17659483424762423,0.0034172169684923673,True,273
+Active Cal,Sleep Hours,activity_active_calories,sleep_total_hours,3,-0.016273380580189435,0.7928047848456474,False,263
+Active Cal,Sleep Score,activity_active_calories,sleep_score,3,-0.04088725241226475,0.5091270864446511,False,263
+Active Cal,HRV,activity_active_calories,hrv_last_night_avg,3,0.02803348432770813,0.650872692862412,False,263
+Active Cal,Steps,activity_active_calories,activity_steps,3,0.04084873052360249,0.5015101608749774,False,273
+Active Cal,Active Cal,activity_active_calories,activity_active_calories,3,0.08518785759884497,0.16042943034956447,False,273
+Active Cal,Resting HR,activity_active_calories,activity_resting_hr,3,0.1566894867880127,0.009511715180271794,True,273
+Active Cal,Battery,activity_active_calories,body_battery_charged,3,0.15824223366389323,0.008815784857652572,True,273
+Resting HR,Sleep Hours,activity_resting_hr,sleep_total_hours,3,0.13559641958647695,0.02789965890444382,True,263
+Resting HR,Sleep Score,activity_resting_hr,sleep_score,3,0.10848016779036869,0.07907839142788751,False,263
+Resting HR,HRV,activity_resting_hr,hrv_last_night_avg,3,-0.33776206874471537,1.9380847097922744e-08,True,263
+Resting HR,Steps,activity_resting_hr,activity_steps,3,-0.10643020937907331,0.07918475688001542,False,273
+Resting HR,Active Cal,activity_resting_hr,activity_active_calories,3,0.21562303091086912,0.0003324137402128963,True,273
+Resting HR,Resting HR,activity_resting_hr,activity_resting_hr,3,0.6285008178568994,2.0460074061697897e-31,True,273
+Resting HR,Battery,activity_resting_hr,body_battery_charged,3,-0.11200844922697462,0.06460075889172516,False,273
+Battery,Sleep Hours,body_battery_charged,sleep_total_hours,3,0.004385136360151774,0.9435755868551067,False,263
+Battery,Sleep Score,body_battery_charged,sleep_score,3,-0.06079457859977047,0.32603338685331873,False,263
+Battery,HRV,body_battery_charged,hrv_last_night_avg,3,0.18603286396355437,0.002453150468335313,True,263
+Battery,Steps,body_battery_charged,activity_steps,3,0.150493009546153,0.012798175159441335,True,273
+Battery,Active Cal,body_battery_charged,activity_active_calories,3,0.09679597873787861,0.11054621827300079,False,273
+Battery,Resting HR,body_battery_charged,activity_resting_hr,3,-0.1947777085227805,0.0012184595245359172,True,273
+Battery,Battery,body_battery_charged,body_battery_charged,3,0.1263683061069552,0.03691172081385775,True,273
