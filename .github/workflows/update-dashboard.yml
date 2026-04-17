@@ -26,8 +26,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run ETL
-        run: python scripts/etl.py
+      - name: Run ETL (skip if raw data missing)
+        run: |
+          if [ -d "data/garmin" ] && ls data/garmin/*.json 1>/dev/null 2>&1; then
+            python scripts/etl.py
+          else
+            echo "Raw Garmin JSONs not in repo (gitignored). Using pre-processed CSVs."
+          fi
 
       - name: Generate static charts
         run: python scripts/generate_charts.py
