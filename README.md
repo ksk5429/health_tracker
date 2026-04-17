@@ -2,7 +2,7 @@
 
 > Automated health data visualization from Garmin, DEXA scans, blood tests, and cognitive assessments.  
 > Charts auto-regenerate via GitHub Actions on data push.  
-> **[→ Interactive Dashboard (GitHub Pages)](https://ksk5429.github.io/health_dashboard/)**
+> **[→ Interactive Dashboard (GitHub Pages)](https://ksk5429.github.io/health_tracker/)**
 
 ---
 
