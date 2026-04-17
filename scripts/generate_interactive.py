@@ -323,6 +323,204 @@ def build_workout_fig():
     return fig
 
 
+def build_recovery_fig():
+    """Interactive Recovery Score timeline with components."""
+    rec = pd.read_csv(PROCESSED / "derived_recovery.csv", parse_dates=["date"])
+    rec = rec.dropna(subset=["recovery_score"])
+
+    fig = make_subplots(rows=2, cols=1, row_heights=[0.7, 0.3],
+                        subplot_titles=("Recovery Score (0-100)", "Component Breakdown"),
+                        vertical_spacing=0.08)
+
+    # Zone bands
+    for y0, y1, color, name in [(0, 33, COLORS["red"], "Low"),
+                                 (33, 66, COLORS["orange"], "Moderate"),
+                                 (66, 100, COLORS["green"], "High")]:
+        fig.add_hrect(y0=y0, y1=y1, fillcolor=color, opacity=0.06,
+                      line_width=0, row=1, col=1)
+
+    # Color by class
+    for cls, color in [("Low", SEQ[2]), ("Moderate", SEQ[3]), ("High", SEQ[1])]:
+        mask = rec["recovery_class"] == cls
+        fig.add_trace(go.Scatter(
+            x=rec.loc[mask, "date"], y=rec.loc[mask, "recovery_score"],
+            mode="markers", marker=dict(size=5, color=color, opacity=0.5),
+            name=cls, legendgroup=cls,
+        ), row=1, col=1)
+
+    # 14-day trend
+    trend = rec["recovery_score"].rolling(14, min_periods=7).mean()
+    fig.add_trace(go.Scatter(x=rec["date"], y=trend, name="14d Trend",
+                             line=dict(color=SEQ[0], width=3)), row=1, col=1)
+
+    # Components
+    for col, name, color in [("recovery_hrv", "HRV (40%)", SEQ[6]),
+                              ("recovery_sleep", "Sleep (35%)", SEQ[4]),
+                              ("recovery_rhr", "RHR inv (25%)", SEQ[2])]:
+        fig.add_trace(go.Scatter(x=rec["date"], y=rec[col], name=name,
+                                 line=dict(color=color, width=1), opacity=0.5,
+                                 fill="tozeroy", fillcolor=f"rgba(0,0,0,0)"),
+                      row=2, col=1)
+
+    fig.update_yaxes(range=[0, 100], row=1, col=1)
+    fig.update_yaxes(range=[0, 100], row=2, col=1)
+    fig.update_layout(
+        height=650,
+        title=dict(text="Recovery Score", font=dict(size=18, color=SEQ[0])),
+        legend=dict(orientation="h", y=1.05),
+        hovermode="x unified",
+        **{k: v for k, v in LAYOUT_DEFAULTS.items() if k not in ["xaxis", "yaxis", "hovermode"]},
+    )
+    return fig
+
+
+def build_training_load_fig():
+    """Interactive training load and ACR."""
+    tl = pd.read_csv(PROCESSED / "derived_training_load.csv", parse_dates=["date"])
+    tl = tl.dropna(subset=["acr"])
+
+    fig = make_subplots(rows=2, cols=1, row_heights=[0.5, 0.5],
+                        subplot_titles=("Training Load (TRIMP)", "Acute:Chronic Workload Ratio"),
+                        vertical_spacing=0.1)
+
+    # TRIMP + acute/chronic
+    fig.add_trace(go.Bar(x=tl["date"], y=tl["daily_trimp"], name="Daily TRIMP",
+                         marker_color=SEQ[3], opacity=0.4), row=1, col=1)
+    fig.add_trace(go.Scatter(x=tl["date"], y=tl["acute_load"], name="Acute (7d)",
+                             line=dict(color=SEQ[2], width=2)), row=1, col=1)
+    fig.add_trace(go.Scatter(x=tl["date"], y=tl["chronic_load"], name="Chronic (28d)",
+                             line=dict(color=SEQ[1], width=2)), row=1, col=1)
+
+    # ACR with zone colors
+    zone_colors = []
+    for acr in tl["acr"]:
+        if pd.isna(acr): zone_colors.append(COLORS["dim"])
+        elif acr < 0.8: zone_colors.append(SEQ[0])
+        elif acr <= 1.3: zone_colors.append(SEQ[1])
+        elif acr <= 1.5: zone_colors.append(SEQ[3])
+        else: zone_colors.append(SEQ[2])
+
+    fig.add_trace(go.Scatter(
+        x=tl["date"], y=tl["acr"], mode="markers",
+        marker=dict(size=5, color=zone_colors, opacity=0.6),
+        name="ACR", showlegend=False,
+    ), row=2, col=1)
+    trend = tl["acr"].rolling(14, min_periods=7).mean()
+    fig.add_trace(go.Scatter(x=tl["date"], y=trend, name="ACR 14d",
+                             line=dict(color=SEQ[0], width=3)), row=2, col=1)
+
+    # Zone bands on ACR
+    for y0, y1, color, name in [(0, 0.8, SEQ[0], "Undertrained"),
+                                 (0.8, 1.3, SEQ[1], "Sweet Spot"),
+                                 (1.3, 1.5, SEQ[3], "Caution"),
+                                 (1.5, 3.0, SEQ[2], "Danger")]:
+        fig.add_hrect(y0=y0, y1=y1, fillcolor=color, opacity=0.06,
+                      line_width=0, row=2, col=1)
+
+    fig.update_yaxes(range=[0, max(2.5, tl["acr"].max() * 1.1)], row=2, col=1)
+    fig.update_layout(
+        height=650,
+        title=dict(text="Training Load & ACR (Gabbett 2016)", font=dict(size=18, color=SEQ[0])),
+        hovermode="x unified",
+        **{k: v for k, v in LAYOUT_DEFAULTS.items() if k not in ["xaxis", "yaxis", "hovermode"]},
+    )
+    return fig
+
+
+def build_lag_correlation_fig():
+    """Interactive lag-correlation heatmaps."""
+    lc = pd.read_csv(PROCESSED / "derived_lag_correlations.csv")
+
+    fig = make_subplots(rows=1, cols=4,
+                        subplot_titles=["Lag = 0d", "Lag = 1d", "Lag = 2d", "Lag = 3d"],
+                        horizontal_spacing=0.05)
+
+    for lag in range(4):
+        sub = lc[lc["lag_days"] == lag]
+        pivot = sub.pivot(index="y_metric", columns="x_metric", values="correlation")
+        sig_pivot = sub.pivot(index="y_metric", columns="x_metric", values="significant")
+
+        # Build annotation text: show r for significant cells
+        text_matrix = []
+        for i in range(len(pivot.index)):
+            row_text = []
+            for j in range(len(pivot.columns)):
+                val = pivot.values[i, j]
+                sig = sig_pivot.values[i, j] if not pd.isna(sig_pivot.values[i, j]) else False
+                if not pd.isna(val) and sig and abs(val) > 0.15:
+                    row_text.append(f"{val:.2f}")
+                else:
+                    row_text.append("")
+            text_matrix.append(row_text)
+
+        fig.add_trace(go.Heatmap(
+            z=pivot.values, x=pivot.columns.tolist(), y=pivot.index.tolist(),
+            colorscale="RdBu_r", zmin=-0.5, zmax=0.5,
+            text=text_matrix, texttemplate="%{text}", textfont=dict(size=9),
+            showscale=(lag == 3),
+            colorbar=dict(title="r", len=0.8, thickness=10) if lag == 3 else None,
+            hovertemplate="X: %{x}<br>Y: %{y}<br>r = %{z:.3f}<extra></extra>",
+        ), row=1, col=lag+1)
+
+    fig.update_layout(
+        height=450,
+        title=dict(text="Lag-Correlation: X(Day N) → Y(Day N+lag)", font=dict(size=18, color=SEQ[0])),
+        **{k: v for k, v in LAYOUT_DEFAULTS.items() if k not in ["xaxis", "yaxis", "hovermode"]},
+    )
+    return fig
+
+
+def build_recomposition_fig():
+    """Interactive body recomposition analysis."""
+    recomp = pd.read_csv(PROCESSED / "derived_recomposition.csv")
+
+    fig = make_subplots(rows=1, cols=3,
+                        subplot_titles=("Fat vs Lean Mass Changes", "Partitioning Ratio", "Monthly Rates"),
+                        horizontal_spacing=0.08)
+
+    # Waterfall
+    fig.add_trace(go.Bar(
+        x=recomp["period"], y=recomp["delta_fat_kg"], name="Fat (kg)",
+        marker_color=[SEQ[1] if v < 0 else SEQ[2] for v in recomp["delta_fat_kg"]],
+        text=[f"{v:+.1f}" for v in recomp["delta_fat_kg"]], textposition="outside",
+    ), row=1, col=1)
+    fig.add_trace(go.Bar(
+        x=recomp["period"], y=recomp["delta_lean_kg"], name="Lean (kg)",
+        marker_color=[SEQ[2] if v < 0 else SEQ[1] for v in recomp["delta_lean_kg"]],
+        text=[f"{v:+.1f}" for v in recomp["delta_lean_kg"]], textposition="outside",
+        marker_pattern_shape="/",
+    ), row=1, col=1)
+
+    # P-ratio
+    fig.add_trace(go.Bar(
+        y=recomp["period"], x=recomp["p_ratio"], orientation="h", name="P-ratio",
+        marker_color=[SEQ[1] if p > 0.5 else SEQ[2] for p in recomp["p_ratio"]],
+        text=[f"P={p:.2f}" for p in recomp["p_ratio"]], textposition="outside",
+        showlegend=False,
+    ), row=1, col=2)
+    fig.add_vline(x=0.5, line=dict(color=COLORS["dim"], dash="dash"), row=1, col=2)
+
+    # Monthly rates
+    fig.add_trace(go.Scatter(
+        x=recomp["period"], y=recomp["fat_rate_kg_month"], mode="lines+markers+text",
+        name="Fat rate", marker=dict(size=10, color=SEQ[2]),
+        text=[f"{v:+.2f}" for v in recomp["fat_rate_kg_month"]], textposition="top center",
+    ), row=1, col=3)
+    fig.add_trace(go.Scatter(
+        x=recomp["period"], y=recomp["lean_rate_kg_month"], mode="lines+markers+text",
+        name="Lean rate", marker=dict(size=10, color=SEQ[1]),
+        text=[f"{v:+.2f}" for v in recomp["lean_rate_kg_month"]], textposition="bottom center",
+    ), row=1, col=3)
+    fig.add_hline(y=0, line=dict(color=COLORS["dim"], width=0.5), row=1, col=3)
+
+    fig.update_layout(
+        height=450,
+        title=dict(text="Body Recomposition (DEXA)", font=dict(size=18, color=SEQ[0])),
+        **LAYOUT_DEFAULTS,
+    )
+    return fig
+
+
 def build_correlations_fig():
     df = pd.read_csv(PROCESSED / "garmin_daily.csv", parse_dates=["date"])
 
@@ -472,6 +670,10 @@ def build_single_page():
         "blood": build_blood_fig(),
         "workout": build_workout_fig(),
         "heatmap": build_heatmap_fig(),
+        "recovery": build_recovery_fig(),
+        "training": build_training_load_fig(),
+        "lag_corr": build_lag_correlation_fig(),
+        "recomp": build_recomposition_fig(),
         "correlations": build_correlations_fig(),
     }
 
@@ -573,6 +775,7 @@ footer {{ text-align:center; color:var(--dim); font-size:0.75rem; margin-top:2re
         <div class="tab" data-tab="blood">&#x1FA78; Blood Tests</div>
         <div class="tab" data-tab="workout">&#x1F4AA; Workouts</div>
         <div class="tab" data-tab="heatmap">&#x1F5D3; Heatmaps</div>
+        <div class="tab" data-tab="intelligence">&#x1F9E0; Intelligence</div>
         <div class="tab" data-tab="correlations">&#x1F517; Correlations</div>
     </div>
 
@@ -597,6 +800,15 @@ footer {{ text-align:center; color:var(--dim); font-size:0.75rem; margin-top:2re
 
     <div class="panel" id="panel-heatmap">
         <div class="chart-card">{divs["heatmap"]}</div>
+    </div>
+
+    <div class="panel" id="panel-intelligence">
+        <div class="two-col">
+            <div class="chart-card">{divs["recovery"]}</div>
+            <div class="chart-card">{divs["training"]}</div>
+        </div>
+        <div class="chart-card">{divs["lag_corr"]}</div>
+        <div class="chart-card">{divs["recomp"]}</div>
     </div>
 
     <div class="panel" id="panel-correlations">

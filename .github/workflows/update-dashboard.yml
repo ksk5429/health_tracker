@@ -34,6 +34,9 @@ jobs:
             echo "Raw Garmin JSONs not in repo (gitignored). Using pre-processed CSVs."
           fi
 
+      - name: Compute derived metrics
+        run: python scripts/derived_metrics.py
+
       - name: Generate static charts
         run: python scripts/generate_charts.py
 

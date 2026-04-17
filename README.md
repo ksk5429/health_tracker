@@ -73,6 +73,42 @@ How sleep, stress, HRV, and activity interact across the full dataset.
 
 ---
 
+## 🧠 Tier 1: Derived Intelligence
+
+Computed from raw data — no new sensors needed. Answers: "Should I train today?" and "Is this biomarker trending toward trouble?"
+
+### Recovery Score (0-100)
+
+Composite of HRV (40%), Sleep Score (35%), inverse Resting HR (25%). Personal z-score baselines, not population norms.
+
+![Recovery Score](dashboard/charts/09_recovery_score.png)
+
+### Training Load & Acute:Chronic Workload Ratio
+
+TRIMP-based load tracking with Gabbett (2016) injury risk zones. Sweet spot = 0.8-1.3 ACR.
+
+![Training Load](dashboard/charts/10_training_load.png)
+
+### Lag-Correlation Matrix
+
+Does yesterday's X predict today's Y? Strongest finding: HRV → next-day Resting HR (r=-0.45).
+
+![Lag Correlations](dashboard/charts/11_lag_correlations.png)
+
+### Blood Biomarker Trajectories (12-month projection)
+
+OLS fit with prediction intervals. Flags markers trending toward clinical thresholds.
+
+![Blood Trajectories](dashboard/charts/12_blood_trajectories.png)
+
+### Body Recomposition (DEXA)
+
+Fat vs lean mass changes, partitioning ratio (P-ratio), and monthly rates across DEXA scan periods.
+
+![Recomposition](dashboard/charts/13_recomposition.png)
+
+---
+
 ## 📁 Data Sources
 
 | Source | Records | Date Range | Format |
@@ -89,8 +125,9 @@ How sleep, stress, HRV, and activity interact across the full dataset.
 ```
 data/          ← Raw data (Garmin JSON, Excel, CSV)
 scripts/
-  etl.py       ← Parse all sources → data/processed/*.csv
-  generate_charts.py      ← Matplotlib charts → dashboard/charts/
+  etl.py               ← Parse all sources → data/processed/*.csv
+  derived_metrics.py    ← Tier 1 intelligence (recovery, ACR, z-scores, projections)
+  generate_charts.py    ← Matplotlib charts → dashboard/charts/
   generate_interactive.py ← Plotly HTML → dashboard/interactive/
 dashboard/
   charts/      ← SVG + PNG for README
@@ -102,6 +139,7 @@ dashboard/
 ```bash
 pip install -r requirements.txt
 python scripts/etl.py
+python scripts/derived_metrics.py
 python scripts/generate_charts.py
 python scripts/generate_interactive.py
 ```

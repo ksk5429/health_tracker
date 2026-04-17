@@ -604,6 +604,300 @@ def chart_dexa_radar():
     save(fig, "08_dexa_radar")
 
 
+# ═══════════════════════════════════════════════════════════════════════════
+# T1-1. Recovery Score Timeline
+# ═══════════════════════════════════════════════════════════════════════════
+def chart_recovery_score():
+    rec = pd.read_csv(PROCESSED / "derived_recovery.csv", parse_dates=["date"])
+    rec = rec.dropna(subset=["recovery_score"])
+
+    fig, axes = plt.subplots(2, 1, figsize=(18, 8), gridspec_kw={"height_ratios": [3, 1]})
+    fig.suptitle("Recovery Score (Composite: 40% HRV + 35% Sleep + 25% Resting HR)",
+                 fontsize=14, fontweight="bold", color=COLORS["accent"], y=0.98)
+
+    ax = axes[0]
+    # Color-coded scatter
+    colors_map = {"Low": COLORS["red"], "Moderate": COLORS["orange"], "High": COLORS["green"]}
+    for cls in ["Low", "Moderate", "High"]:
+        mask = rec["recovery_class"] == cls
+        ax.scatter(rec.loc[mask, "date"], rec.loc[mask, "recovery_score"],
+                   c=colors_map[cls], s=12, alpha=0.5, label=cls, zorder=3)
+
+    # Trend line
+    add_trend_line(ax, rec["date"].values.astype("datetime64[ns]"),
+                   rec["recovery_score"].values, COLORS["accent"])
+
+    # Zone bands
+    ax.axhspan(0, 33, alpha=0.06, color=COLORS["red"])
+    ax.axhspan(33, 66, alpha=0.06, color=COLORS["orange"])
+    ax.axhspan(66, 100, alpha=0.06, color=COLORS["green"])
+    ax.set_ylim(0, 100)
+    ax.set_ylabel("Recovery Score")
+    ax.legend(loc="upper left", fontsize=9)
+    ax.grid(True, alpha=0.15)
+    format_date_axis(ax, rec["date"])
+
+    # Component breakdown
+    ax2 = axes[1]
+    ax2.fill_between(rec["date"], rec["recovery_hrv"], alpha=0.3, color=COLORS["cyan"], label="HRV (40%)")
+    ax2.fill_between(rec["date"], rec["recovery_sleep"], alpha=0.3, color=COLORS["purple"], label="Sleep (35%)")
+    ax2.fill_between(rec["date"], rec["recovery_rhr"], alpha=0.3, color=COLORS["red"], label="RHR inv (25%)")
+    ax2.set_ylim(0, 100)
+    ax2.set_ylabel("Components")
+    ax2.legend(loc="upper left", fontsize=8, ncol=3)
+    ax2.grid(True, alpha=0.15)
+    format_date_axis(ax2, rec["date"])
+
+    save(fig, "09_recovery_score")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# T1-2. Training Load & Acute:Chronic Workload Ratio
+# ═══════════════════════════════════════════════════════════════════════════
+def chart_training_load():
+    tl = pd.read_csv(PROCESSED / "derived_training_load.csv", parse_dates=["date"])
+    tl = tl.dropna(subset=["acr"])
+
+    fig, axes = plt.subplots(3, 1, figsize=(18, 10), gridspec_kw={"height_ratios": [2, 2, 1]})
+    fig.suptitle("Training Load & Acute:Chronic Workload Ratio",
+                 fontsize=14, fontweight="bold", color=COLORS["accent"], y=0.98)
+
+    # Daily TRIMP
+    ax = axes[0]
+    ax.bar(tl["date"], tl["daily_trimp"], color=COLORS["orange"], alpha=0.5, width=1)
+    ax.plot(tl["date"], tl["acute_load"], color=COLORS["red"], linewidth=2, label="Acute (7d)")
+    ax.plot(tl["date"], tl["chronic_load"], color=COLORS["green"], linewidth=2, label="Chronic (28d EWMA)")
+    ax.set_ylabel("Training Load (TRIMP)")
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.15)
+    format_date_axis(ax, tl["date"])
+
+    # ACR with zones
+    ax = axes[1]
+    acr_colors = []
+    for _, row in tl.iterrows():
+        if pd.isna(row["acr"]):
+            acr_colors.append(COLORS["text_dim"])
+        elif row["acr"] < 0.8:
+            acr_colors.append(COLORS["accent"])
+        elif row["acr"] <= 1.3:
+            acr_colors.append(COLORS["green"])
+        elif row["acr"] <= 1.5:
+            acr_colors.append(COLORS["orange"])
+        else:
+            acr_colors.append(COLORS["red"])
+
+    ax.scatter(tl["date"], tl["acr"], c=acr_colors, s=12, alpha=0.6, zorder=3)
+    add_trend_line(ax, tl["date"].values.astype("datetime64[ns]"),
+                   tl["acr"].values, COLORS["accent"])
+
+    # Zone bands
+    ax.axhspan(0, 0.8, alpha=0.05, color=COLORS["accent"], label="Undertrained")
+    ax.axhspan(0.8, 1.3, alpha=0.08, color=COLORS["green"], label="Sweet Spot")
+    ax.axhspan(1.3, 1.5, alpha=0.05, color=COLORS["orange"], label="Caution")
+    ax.axhspan(1.5, 3.0, alpha=0.05, color=COLORS["red"], label="Danger")
+    ax.set_ylim(0, max(2.5, tl["acr"].max() * 1.1))
+    ax.set_ylabel("Acute:Chronic Ratio")
+    ax.legend(loc="upper right", fontsize=8, ncol=4)
+    ax.grid(True, alpha=0.15)
+    format_date_axis(ax, tl["date"])
+
+    # Monotony & Strain
+    ax = axes[2]
+    ax.fill_between(tl["date"], tl["monotony"].clip(upper=10), alpha=0.4,
+                    color=COLORS["purple"], label="Monotony")
+    ax.set_ylabel("Monotony")
+    ax.set_ylim(0, 6)
+    ax.legend(loc="upper left", fontsize=8)
+    ax.grid(True, alpha=0.15)
+    format_date_axis(ax, tl["date"])
+
+    save(fig, "10_training_load")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# T1-3. Lag-Correlation Heatmap
+# ═══════════════════════════════════════════════════════════════════════════
+def chart_lag_correlations():
+    lc = pd.read_csv(PROCESSED / "derived_lag_correlations.csv")
+
+    fig, axes = plt.subplots(1, 4, figsize=(20, 5))
+    fig.suptitle("Lag-Correlation Matrix: Does X on Day N predict Y on Day N+lag?",
+                 fontsize=14, fontweight="bold", color=COLORS["accent"], y=1.02)
+
+    for lag, ax in enumerate(axes):
+        sub = lc[lc["lag_days"] == lag]
+        pivot = sub.pivot(index="y_metric", columns="x_metric", values="correlation")
+        # Significance mask
+        sig_pivot = sub.pivot(index="y_metric", columns="x_metric", values="significant")
+
+        im = ax.imshow(pivot.values, cmap="RdBu_r", vmin=-0.5, vmax=0.5, aspect="auto")
+        ax.set_xticks(range(len(pivot.columns)))
+        ax.set_xticklabels(pivot.columns, rotation=45, ha="right", fontsize=7)
+        ax.set_yticks(range(len(pivot.index)))
+        ax.set_yticklabels(pivot.index if lag == 0 else [], fontsize=7)
+        ax.set_title(f"Lag = {lag}d", fontsize=10, fontweight="bold")
+
+        # Annotate significant cells
+        for i in range(len(pivot.index)):
+            for j in range(len(pivot.columns)):
+                val = pivot.values[i, j]
+                sig = sig_pivot.values[i, j] if not pd.isna(sig_pivot.values[i, j]) else False
+                if not pd.isna(val) and sig and abs(val) > 0.15:
+                    ax.text(j, i, f"{val:.2f}", ha="center", va="center",
+                            fontsize=6, fontweight="bold",
+                            color="white" if abs(val) > 0.3 else COLORS["text_dim"])
+
+    fig.colorbar(im, ax=axes, orientation="vertical", fraction=0.02, pad=0.02,
+                 label="Pearson r")
+
+    save(fig, "11_lag_correlations")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# T1-4. Blood Biomarker Trajectories with Projections
+# ═══════════════════════════════════════════════════════════════════════════
+def chart_blood_trajectories():
+    proj = pd.read_csv(PROCESSED / "derived_blood_projections.csv", parse_dates=["date"])
+    blood = pd.read_csv(PROCESSED / "blood_tests.csv", parse_dates=["date"])
+    blood_num = blood[blood["is_numeric"] == True].copy()
+    blood_num["value"] = pd.to_numeric(blood_num["value"], errors="coerce")
+
+    key_markers = [
+        ("TOTAL CHOLESTEROL", "Total Cholesterol", (100, 260), [(200, "Desirable")]),
+        ("LDL CHOLESTEROL", "LDL Cholesterol", (50, 180), [(100, "Optimal"), (130, "Borderline")]),
+        ("CREATININE", "Creatinine", (0.8, 1.6), [(1.3, "CKD concern")]),
+        ("HbA1c", "HbA1c", (4.5, 6.5), [(5.7, "Pre-diabetic")]),
+        ("GOT (AST)", "AST", (10, 55), [(40, "Upper normal")]),
+        ("GPT (ALT)", "ALT", (10, 55), [(40, "Upper normal")]),
+    ]
+
+    fig, axes = plt.subplots(2, 3, figsize=(18, 9))
+    fig.suptitle("Blood Biomarker Trajectories — 12-Month Projection",
+                 fontsize=14, fontweight="bold", color=COLORS["accent"], y=0.98)
+
+    for idx, (ax, (prefix, title, ylim, ref_lines)) in enumerate(zip(axes.flatten(), key_markers)):
+        color = COLORS["gradient"][idx % len(COLORS["gradient"])]
+        all_dates = []
+
+        # Observed data
+        obs = blood_num[blood_num["marker"].str.contains(prefix, case=False, na=False)]
+        if len(obs) > 0:
+            ax.plot(obs["date"], obs["value"], "o", color=color, markersize=10, zorder=5)
+            all_dates.extend(obs["date"].tolist())
+            for x, y in zip(obs["date"], obs["value"]):
+                ax.annotate(f"{y:.1f}", (x, y), textcoords="offset points", xytext=(0, 10),
+                            ha="center", fontsize=8, fontweight="bold", color=color)
+
+        # Projected future
+        marker_proj = proj[proj["marker"].str.contains(prefix, case=False, na=False)]
+        if len(marker_proj) > 0 and len(obs) > 0:
+            marker_proj = marker_proj.sort_values("date")
+            last_obs = obs["date"].max()
+            future = marker_proj[marker_proj["date"] > last_obs]
+            if len(future) > 0:
+                ax.plot(future["date"], future["predicted"], "--", color=color, alpha=0.6, linewidth=2)
+                ax.fill_between(future["date"], future["ci_lower"], future["ci_upper"],
+                                alpha=0.1, color=color)
+                all_dates.extend(future["date"].tolist())
+                # Shade projection zone
+                ax.axvspan(last_obs, future["date"].max(), alpha=0.04, color=COLORS["text_dim"])
+
+        # Set x-axis range BEFORE placing ref line text
+        if all_dates:
+            xmin = min(all_dates) - timedelta(days=60)
+            xmax = max(all_dates) + timedelta(days=30)
+            ax.set_xlim(xmin, xmax)
+
+        # Reference lines (placed after xlim is set)
+        for ref_val, ref_label in ref_lines:
+            ax.axhline(y=ref_val, color=COLORS["orange"], linestyle=":", alpha=0.5)
+            ax.text(0.98, ref_val, f" {ref_label}", va="center", fontsize=7,
+                    color=COLORS["orange"], alpha=0.7, transform=ax.get_yaxis_transform())
+
+        ax.set_title(title, fontsize=11, fontweight="bold", pad=8)
+        ax.set_ylim(ylim)
+        ax.grid(True, alpha=0.15)
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%b '%y"))
+        ax.tick_params(axis="x", labelsize=7)
+
+    save(fig, "12_blood_trajectories")
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# T1-5. Body Recomposition Waterfall
+# ═══════════════════════════════════════════════════════════════════════════
+def chart_recomposition():
+    recomp = pd.read_csv(PROCESSED / "derived_recomposition.csv")
+
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+    fig.suptitle("Body Recomposition Analysis (DEXA)",
+                 fontsize=14, fontweight="bold", color=COLORS["accent"], y=0.98)
+
+    # Waterfall: fat vs lean changes
+    ax = axes[0]
+    x = np.arange(len(recomp))
+    w = 0.35
+    bars_fat = ax.bar(x - w/2, recomp["delta_fat_kg"], w, label="Fat (kg)",
+                       color=[COLORS["green"] if v < 0 else COLORS["red"] for v in recomp["delta_fat_kg"]],
+                       alpha=0.7)
+    bars_lean = ax.bar(x + w/2, recomp["delta_lean_kg"], w, label="Lean (kg)",
+                        color=[COLORS["red"] if v < 0 else COLORS["green"] for v in recomp["delta_lean_kg"]],
+                        alpha=0.7, hatch="//")
+    for bar_group in [bars_fat, bars_lean]:
+        for bar in bar_group:
+            h = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width()/2, h + (0.1 if h >= 0 else -0.2),
+                    f"{h:+.1f}", ha="center", va="bottom" if h >= 0 else "top",
+                    fontsize=8, fontweight="bold", color=COLORS["text"])
+    ax.set_xticks(x)
+    ax.set_xticklabels(recomp["period"], fontsize=7, rotation=15)
+    ax.set_ylabel("Mass Change (kg)")
+    ax.axhline(y=0, color=COLORS["text_dim"], linewidth=0.5)
+    ax.legend(fontsize=9)
+    ax.set_title("Fat vs Lean Mass Changes", fontsize=11, fontweight="bold")
+    ax.grid(True, alpha=0.15)
+
+    # P-ratio gauge
+    ax = axes[1]
+    for i, (_, row) in enumerate(recomp.iterrows()):
+        p = row["p_ratio"]
+        color = COLORS["green"] if (row["delta_total_kg"] < 0 and p < 0.5) or \
+                (row["delta_total_kg"] > 0 and p > 0.5) else COLORS["red"]
+        ax.barh(i, p, color=color, alpha=0.7, height=0.6)
+        ax.text(p + 0.02, i, f"P={p:.2f}", va="center", fontsize=9, fontweight="bold", color=color)
+    ax.axvline(x=0.5, color=COLORS["text_dim"], linestyle="--", alpha=0.5)
+    ax.text(0.5, len(recomp) - 0.3, "←fat-dominant | lean-dominant→", ha="center",
+            fontsize=7, color=COLORS["text_dim"])
+    ax.set_yticks(range(len(recomp)))
+    ax.set_yticklabels(recomp["period"], fontsize=7)
+    ax.set_xlabel("Partitioning Ratio")
+    ax.set_title("Partitioning Ratio (lean fraction of mass change)", fontsize=11, fontweight="bold")
+    ax.set_xlim(-0.5, 1.5)
+    ax.grid(True, alpha=0.15)
+
+    # Monthly rates
+    ax = axes[2]
+    ax.plot(range(len(recomp)), recomp["fat_rate_kg_month"], "o-",
+            color=COLORS["red"], markersize=10, linewidth=2, label="Fat rate")
+    ax.plot(range(len(recomp)), recomp["lean_rate_kg_month"], "s-",
+            color=COLORS["green"], markersize=10, linewidth=2, label="Lean rate")
+    ax.axhline(y=0, color=COLORS["text_dim"], linewidth=0.5)
+    for i, (_, row) in enumerate(recomp.iterrows()):
+        ax.annotate(f"{row['fat_rate_kg_month']:+.2f}", (i, row["fat_rate_kg_month"]),
+                    textcoords="offset points", xytext=(-15, 10), fontsize=8, color=COLORS["red"])
+        ax.annotate(f"{row['lean_rate_kg_month']:+.2f}", (i, row["lean_rate_kg_month"]),
+                    textcoords="offset points", xytext=(5, -15), fontsize=8, color=COLORS["green"])
+    ax.set_xticks(range(len(recomp)))
+    ax.set_xticklabels(recomp["period"], fontsize=7, rotation=15)
+    ax.set_ylabel("kg/month")
+    ax.set_title("Monthly Change Rates", fontsize=11, fontweight="bold")
+    ax.legend(fontsize=9)
+    ax.grid(True, alpha=0.15)
+
+    save(fig, "13_recomposition")
+
+
 def main():
     print("=== Generating Dashboard Charts ===")
     chart_kpi_cards()
@@ -615,6 +909,11 @@ def main():
     chart_activity_heatmap()
     chart_correlations()
     chart_dexa_radar()
+    chart_recovery_score()
+    chart_training_load()
+    chart_lag_correlations()
+    chart_blood_trajectories()
+    chart_recomposition()
     print(f"=== Done. {len(list(CHARTS.glob('*.png')))} PNGs + SVGs in dashboard/charts/ ===")
 
 
