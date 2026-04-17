@@ -365,6 +365,97 @@ def build_correlations_fig():
     return fig
 
 
+def build_heatmap_fig():
+    """Interactive heatmap calendars for 6 health variables."""
+    df = pd.read_csv(PROCESSED / "garmin_daily.csv", parse_dates=["date"])
+    df["dow"] = df["date"].dt.dayofweek
+    df["week_idx"] = (df["date"] - df["date"].min()).dt.days // 7
+    dow_labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+    metrics = [
+        ("activity_steps", "Steps", "YlGn"),
+        ("sleep_total_hours", "Sleep (hours)", "PuBu"),
+        ("sleep_score", "Sleep Score", "RdYlGn"),
+        ("activity_active_calories", "Active Calories", "YlOrRd"),
+        ("hrv_last_night_avg", "HRV (ms)", "BuGn"),
+        ("activity_resting_hr", "Resting HR (bpm)", "RdYlGn_r"),
+    ]
+
+    fig = make_subplots(
+        rows=6, cols=1,
+        subplot_titles=[m[1] for m in metrics],
+        vertical_spacing=0.035,
+        shared_xaxes=True,
+    )
+
+    # Build week-index-to-month-label mapping for x-axis
+    month_ticks = df.groupby(df["date"].dt.to_period("M")).first()
+    tick_vals = month_ticks["week_idx"].tolist()
+    tick_text = [d.strftime("%b '%y") for d in month_ticks["date"]]
+
+    # Build hover text: show actual date for each cell
+    # Create a lookup: (dow, week_idx) -> date string
+    date_lookup = {}
+    for _, row in df.iterrows():
+        date_lookup[(row["dow"], row["week_idx"])] = row["date"].strftime("%a %b %d, %Y")
+
+    for i, (col, title, colorscale) in enumerate(metrics):
+        pivot = df.pivot_table(index="dow", columns="week_idx", values=col, aggfunc="mean")
+        # Ensure all 7 days present
+        pivot = pivot.reindex(range(7))
+
+        # Build custom hover text
+        hover_text = []
+        for dow in range(7):
+            row_text = []
+            for wk in pivot.columns:
+                val = pivot.loc[dow, wk] if dow in pivot.index else None
+                date_str = date_lookup.get((dow, wk), "")
+                if pd.notna(val):
+                    row_text.append(f"{date_str}<br>{title}: {val:.1f}")
+                else:
+                    row_text.append(f"{date_str}<br>No data")
+            hover_text.append(row_text)
+
+        fig.add_trace(go.Heatmap(
+            z=pivot.values,
+            x=pivot.columns.tolist(),
+            y=dow_labels,
+            colorscale=colorscale,
+            hovertext=hover_text,
+            hovertemplate="%{hovertext}<extra></extra>",
+            showscale=True,
+            colorbar=dict(
+                len=0.12, y=1.0 - i * 0.167 - 0.06,
+                thickness=10, tickfont=dict(size=9, color=COLORS["dim"]),
+                title=dict(text=title.split("(")[0].strip(), font=dict(size=9, color=COLORS["dim"])),
+            ),
+            xgap=2, ygap=2,
+        ), row=i+1, col=1)
+
+        fig.update_yaxes(
+            autorange="reversed", tickfont=dict(size=9),
+            row=i+1, col=1,
+        )
+
+    # Set x-axis ticks on bottom only
+    for i in range(1, 7):
+        fig.update_xaxes(showticklabels=(i == 6), row=i, col=1)
+    fig.update_xaxes(
+        tickvals=tick_vals, ticktext=tick_text,
+        tickfont=dict(size=9, color=COLORS["dim"]),
+        row=6, col=1,
+    )
+
+    fig.update_layout(
+        height=1100,
+        title=dict(text="Health Calendar Heatmaps", font=dict(size=18, color=SEQ[0])),
+        **{k: v for k, v in LAYOUT_DEFAULTS.items() if k not in ["xaxis", "yaxis", "hovermode"]},
+        hovermode="closest",
+    )
+    return fig
+
+
 def build_single_page():
     """Build a single-page interactive dashboard with tab navigation."""
     garmin = pd.read_csv(PROCESSED / "garmin_daily.csv", parse_dates=["date"])
@@ -380,6 +471,7 @@ def build_single_page():
         "radar": build_dexa_radar_fig(),
         "blood": build_blood_fig(),
         "workout": build_workout_fig(),
+        "heatmap": build_heatmap_fig(),
         "correlations": build_correlations_fig(),
     }
 
@@ -480,6 +572,7 @@ footer {{ text-align:center; color:var(--dim); font-size:0.75rem; margin-top:2re
         <div class="tab" data-tab="dexa">&#x1F9B4; DEXA</div>
         <div class="tab" data-tab="blood">&#x1FA78; Blood Tests</div>
         <div class="tab" data-tab="workout">&#x1F4AA; Workouts</div>
+        <div class="tab" data-tab="heatmap">&#x1F5D3; Heatmaps</div>
         <div class="tab" data-tab="correlations">&#x1F517; Correlations</div>
     </div>
 
@@ -500,6 +593,10 @@ footer {{ text-align:center; color:var(--dim); font-size:0.75rem; margin-top:2re
 
     <div class="panel" id="panel-workout">
         <div class="chart-card">{divs["workout"]}</div>
+    </div>
+
+    <div class="panel" id="panel-heatmap">
+        <div class="chart-card">{divs["heatmap"]}</div>
     </div>
 
     <div class="panel" id="panel-correlations">
